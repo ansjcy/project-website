@@ -116,6 +116,7 @@ Use the following grouping dimensions to analyze different aspects of query dist
 - To view the indexes that generate the largest top query count, group queries by **index**---these are the indexes for which query optimization will have the greatest impact.
 - To identify whether a specific user or application is responsible for a disproportionate share of resource-intensive queries, group queries by **username**.
 - To understand how different workload classes contribute to the top query list, group queries by **WLM group** (if you're using workload management).
+
 ### Performance analysis: Line chart and heatmap
 
 The performance analysis section offers two chart types that you can use depending on your investigation goals.
@@ -152,9 +153,7 @@ GET /_insights/top_queries?type=latency&from=2026-04-01T14:00:00.000Z&to=2026-04
 
 ### Top query data table
 
-The data table lists all top queries or query groups within your selected time range in a sortable, filterable view, as shown in the following image.
-
-![Top N Queries data table](/assets/media/blog-images/2026-04-07-query-insights-dashboards-visualizations/top-queries-data-table.png)
+The data table lists all top queries or query groups within your selected time range in a sortable, filterable view.
 
 Key columns include the query **ID** (linked to the details page), **Type** (query or group, when [grouping by similarity](https://opensearch.org/docs/latest/observing-your-data/query-insights/grouping-top-n-queries/) is enabled), **Query Count**, **Timestamp**, **Indexes**, **Search Type**, **Coordinator Node ID**, **Total Shards**, and the core performance metrics: **Latency**, **CPU Time**, and **Memory Usage**. You can filter by type, indexes, search type, coordinator node, and WLM group to narrow results.
 
@@ -232,6 +231,8 @@ With [grouping by similarity](https://opensearch.org/docs/latest/observing-your-
 Selecting the group details confirms the recurring pattern and shows aggregate metrics across all matching queries, as shown in the following image.
 
 ![Troubleshooting workflow: Query group details](/assets/media/blog-images/2026-04-07-query-insights-dashboards-visualizations/workflow-query-group-details.png)
+
+With a likely culprit in hand, you can take targeted action. The leading-wildcard query against a high-cardinality `keyword` field stands out as a strong optimization candidate, since this pattern forces OpenSearch to scan a large number of terms. From here, you might want to rewrite the query by replacing the wildcard with a more selective match or remapping the field to better support the access pattern. After applying those changes, you could return to the same line chart and percentile panels to check whether P99 latency drops back toward its baseline.
 
 ## Conclusion
 
