@@ -43,7 +43,6 @@ The Live Queries page gives you an immediate view of every search query currentl
 
 At the top of the page, five metric panels provide an at-a-glance summary of your cluster's current search activity, as shown in the following image.
 
-<!-- TODO: Screenshot of the Live Queries metric overview panels -->
 ![Live Queries metric overview panels](/assets/media/blog-images/2026-04-07-query-insights-dashboards-visualizations/live-queries-metric-panels.png)
 
 The metric panels provide the following information:
@@ -60,7 +59,6 @@ When you receive alerts about cluster performance, these panels give you an inst
 
 Below the metric panels, two distribution charts break down your active queries by **node** and **index**, as shown in the following image. Each chart can be toggled between a donut chart and a horizontal bar chart, depending on your preference.
 
-<!-- TODO: Screenshot of the Queries by Node and Queries by Index charts -->
 ![Live Queries distribution charts](/assets/media/blog-images/2026-04-07-query-insights-dashboards-visualizations/live-queries-distribution-charts.png)
 
 - **Queries by Node**: Shows how queries are distributed across your cluster's coordinator nodes. A color-coded legend maps each node to its query count.
@@ -72,7 +70,6 @@ An uneven distribution in the **Queries by Node** chart may indicate a hot node-
 
 The interactive table at the bottom of the page lists all information about every active query, including the timestamp, task ID, target indexes, coordinator node, elapsed time, CPU usage, memory usage, search type, and the query's current status (running or canceled), as shown in the following image.
 
-<!-- TODO: Screenshot of the Live Queries table -->
 ![Live Queries table](/assets/media/blog-images/2026-04-07-query-insights-dashboards-visualizations/live-queries-table.png)
 
 You can filter the results by index, search type, or coordinator node to focus on specific workloads. Select any numeric column header to sort by that metric---for example, sort by elapsed time to surface the slowest queries. The table also supports query cancelation: you can select one or more queries and cancel them directly from the dashboard. This is useful for stopping queries that are consuming excessive resources. The page supports configurable auto-refresh intervals, so you can monitor the query stream continuously during incident response.
@@ -209,7 +206,6 @@ To show how these visualizations work together, the following example explores a
 
 You start on the **Live Queries** page and immediately see a high active query count, as shown in the following image. The **Queries by Node** chart shows an even distribution, ruling out a hot-node issue. But the **Queries by Index** chart reveals that the `user-activity` index accounts for most of the traffic. Sorting the live queries table by elapsed time, you spot several long-running queries against that index and cancel them to stabilize the cluster, as shown in the following image.
 
-<!-- TODO: Screenshot of the Live Queries page showing high active query count and the Queries by Index chart highlighting the user-activity index -->
 ![Troubleshooting workflow: Live Queries page](/assets/media/blog-images/2026-04-07-query-insights-dashboards-visualizations/workflow-live-queries.png)
 
 Next, you switch to the **Top N Queries** page and set the time range to the past two hours. The **P99 latency** panel confirms an elevated value. Switching to the **line chart**, you can see the max latency spike starting around 45 minutes ago, as shown in the following image.
